@@ -1,110 +1,202 @@
-# Schronisko Fullstack App
+# 🐾 Animal Helper
 
-## 1. Przegląd Projektu
+A prototype platform for shelter transparency, developed during the ID2 Impact Hackathon 2026.
 
-### Cel Systemu
-
-**Schronisko Fullstack App** to centralna platforma zaprojektowana do agregacji, wizualizacji i analizy danych dotyczących schronisk dla zwierząt. Głównym celem jest zwiększenie przejrzystości w sektorze dobrostanu zwierząt poprzez udostępnienie ujednoliconego interfejsu do przeglądania profili schronisk oraz oceny ich wiarygodności bazującej na twardych danych.
-
-### Rozwiązywany Problem
-
-Dane dotyczące schronisk są często rozproszone, nieustrukturyzowane i trudne do weryfikacji. Brak centralnego rejestru utrudnia:
-
-- Adopcję zwierząt ze sprawdzonych miejsc.
-- Monitorowanie warunków bytowych przez gminy i organizacje.
-- Szybką ocenę, czy dana placówka działa legalnie i transparentnie.
-
-Aplikacja rozwiązuje ten problem poprzez normalizację danych i wprowadzenie **Wskaźnika Zaufania (Trust Score)**.
+<img width="100%" alt="App Preview" src="https://github.com/user-attachments/assets/3a94cada-49c0-4abc-b0be-6e1b97678855" />
 
 ---
 
-## 2. Kluczowe Funkcje
+## About the Project
 
-- **Interaktywna Mapa:** Wizualizacja lokalizacji schronisk w regionie.
-- **Profile Schronisk:** Szczegółowe karty placówek zawierające dane operatora, statystyki i informacje kontaktowe.
-- **System Oceny Zaufania (Trust Score):** Algorytmiczna ocena wiarygodności schroniska.
-- **Ustrukturyzowane Opinie:** System recenzji pozwalający społeczności na ocenę placówek.
-- **System Zgłoszeń:** Możliwość zgłaszania nieprawidłowości lub błędnych danych.
+Animal Helper is a prototype of a shelter transparency platform developed during the Idea2Impact Hackathon 2026 in collaboration with Animal Helper and Fundacja Psia Krew.
 
----
+The project addresses a real-world problem:
+lack of accessible, structured, and comparable data about animal shelters.
 
-## 3. Model Danych (Uproszczony)
+Instead of relying only on scattered information or emotional opinions, the platform introduces a data-driven and explainable system that combines:
 
-### Obiekt Schroniska (Shelter)
-
-Główna encja zawierająca:
-
-- **Tożsamość:** Nazwa, Operator, NIP, KRS, Status licencji.
-- **Lokalizacja:** Współrzędne geograficzne, Gmina.
-- **Przejrzystość:** Poziom dostępu publicznego, liczba źródeł danych.
-
-### Wskaźniki Dobrostanu (Welfare Indicators)
-
-Metryki oceniające jakość opieki:
-
-- **Pojemność:** Szacowana liczba miejsc vs rzeczywista liczba zwierząt (Wskaźnik przepełnienia).
-- **Wyniki:** Liczba adopcji, wskaźniki śmiertelności.
-- **Programy:** Dostępność wolontariatu, nadzór weterynaryjny.
-
-### Struktura Opinii
-
-- Opinie użytkowników, które wpływają na "miękką" część oceny schroniska.
+- structured public data
+- welfare indicators
+- community feedback
 
 ---
 
-## 4. Wyjaśnienie Wskaźnika Zaufania (Trust Score)
+## Problem
 
-System stosuje ważony algorytm do obliczenia ogólnej oceny wiarygodności (0-100%).
+Information about animal shelters is:
 
-### Formuła Główna
+- fragmented across multiple sources (municipalities, BIP, websites, social media)
+- often incomplete or outdated
+- difficult to verify and compare
 
-$$
-\text{Final Score} = (\text{Structured Score} \times 0.55) + (\text{Review Score} \times 0.45)
-$$
+There is no single, user-friendly public layer that allows citizens to:
 
-### Wynik Strukturalny (Dane twarde)
-
-Obliczany na podstawie weryfikowalnych metryk:
-
-$$
-\text{Structured Score} = (\text{Formal Score} \times 0.65) + (\text{Welfare Score} \times 0.35)
-$$
-
-1.  **Formal Score (Prawno-Administracyjny):**
-    - Weryfikacja tożsamości operatora i rejestracji (NIP/KRS).
-    - Potwierdzony nadzór weterynaryjny i status licencji.
-    - Poziom transparentności i współpraca z gminą.
-    - Dostępność kanałów kontaktu (Telefon/Email/WWW).
-
-2.  **Welfare Score (Dobrostan):**
-    - **Przepełnienie:** Stosunek liczby zwierząt do pojemności.
-    - **Otwartość:** Poziom dostępu dla osób z zewnątrz (np. wolontariuszy).
-    - **Programy:** Aktywny wolontariat i skuteczność adopcji.
-    - **Zdrowie:** Wskaźniki śmiertelności zwierząt.
+- understand how a shelter operates
+- compare shelters
+- assess transparency and potential risks
 
 ---
 
-## 5. Technologia (Tech Stack)
+## Solution
+
+We created a map-based platform that aggregates and structures shelter data into a single interface.
+
+The system provides:
+
+- Interactive Map - explore shelters geographically
+- Shelter Profiles - structured information about each facility
+- Trust Score - explainable evaluation based on data and reviews
+- Structured Reviews - category-based user feedback
+- Reporting System - submit issues or concerns
+
+---
+
+## Trust Score (Core Idea)
+
+Instead of a simple rating, we use a weighted model:
+
+**Final Score = (Structured Score × 0.55) + (Review Score × 0.45)**
+
+### Structured Score includes:
+
+- legal and administrative data
+- veterinary oversight
+- transparency level
+- welfare indicators (capacity, mortality, adoption activity)
+
+### Review Score includes:
+
+- structured user feedback
+- category-based evaluation
+- credibility adjustments (anti-spam, weighting)
+
+The goal is not to create a hate ranking, but to provide a balanced and explainable trust signal.
+
+---
+
+## Key Features
+
+- Interactive map (OpenStreetMap)
+- Shelter data aggregation and normalization
+- Trust scoring algorithm
+- Review system with categories
+- Incident reporting system
+- Backend API with automatic score calculation
+
+---
+
+## 🛠️ Tech Stack
 
 ### Backend
 
-- **Język:** Python 3.13+
-- **Framework:** FastAPI
-- **Baza danych:** PostgreSQL (driver asyncpg)
-- **Walidacja:** Pydantic
+- Python 3.13+
+- FastAPI
+- PostgreSQL
+- Pydantic
 
 ### Frontend
 
-- **Framework:** React 19
-- **Build Tool:** Vite
-- **Style:** TailwindCSS
-- **Mapy:** Leaflet / React-Leaflet
+- React 19
+- Vite
+- TailwindCSS
+- Leaflet / React-Leaflet
 
 ---
 
-## 6. Przyszłe Usprawnienia
+## ⚙️ Getting Started
 
-- **Weryfikacja Schronisk:** Wdrożenie systemu odznak "Zweryfikowane Schronisko" dla operatorów, którzy potwierdzą swoją tożsamość.
-- **Moderacja:** Panel administracyjny do zarządzania zgłoszeniami i recenzjami.
-- **Integracja z Rejestrami:** Automatyczne pobieranie danych z publicznych rejestrów weterynaryjnych (np. GLW).
-- **Zaawansowane Raporty:** Generowanie PDF z podsumowaniem działalności schroniska dla gmin.
+### 1. Backend
+
+```bash
+cd backend
+uv sync
+cd app
+python main.py
+```
+
+Backend runs at:
+
+- http://localhost:8000
+- Swagger docs: http://localhost:8000/docs
+
+### 2. Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs at:
+
+- http://localhost:5173
+
+---
+
+## What Happens Automatically
+
+When the backend starts:
+
+- shelter scores are calculated automatically
+- structural and review data are analyzed
+- systemic issues are detected across multiple categories
+
+---
+
+## Project Status
+
+This project is an early-stage prototype, created within limited hackathon time.
+
+### What is implemented:
+
+- core data model
+- scoring logic
+- basic UI and map
+- API and data flow
+
+### What is not fully implemented yet:
+
+- advanced filtering
+- full verification system
+- trend analysis
+- complete data coverage
+
+---
+
+## Future Development
+
+Planned improvements include:
+
+- shelter verification system
+- advanced filtering and search
+- trend analysis of reviews
+- improved data completeness
+- public event and volunteer modules
+- lost & found animals system
+- map-based safety navigation for dog owners
+
+---
+
+## Context
+
+This project was created as part of:
+
+- Idea2Impact Hackathon 2026
+- collaboration with Animal Helper
+- in response to a real challenge proposed by Fundacja Psia Krew
+
+🔗 https://www.idea2impact.pl/
+🔗 https://www.animalhelper.pl/
+
+---
+
+## 👥 Team
+
+Project developed by a student team (UG, 2026)
+
+---
+
+## 📌 Note
+
+This repository represents a prototype and concept validation, not a finished production system.
+The project is currently being considered for further development in collaboration with external partners.
