@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e5e7eb;
+  color: #f3f4f6;
+}
+
+/* Leaflet must fill its container */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Selected marker highlight */
+.selected-marker {
+  filter: drop-shadow(0 0 8px #facc15) brightness(1.3);
+  z-index: 1000 !important;
+}
+
+/* Smooth scrollbar inside shelter info panel */
+.shelter-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.shelter-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.shelter-scroll::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 999px;
+}
